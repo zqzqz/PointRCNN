@@ -56,6 +56,10 @@ class PointRCNN(nn.Module):
                                    'seg_mask': seg_mask,
                                    'roi_boxes3d': rois,
                                    'pts_depth': pts_depth}
+
+                if cfg.RCNN.USE_INTENSITY:
+                    rcnn_input_info['rpn_intensity'] = input_data['pts_input'][:,:,3]
+
                 if self.training:
                     rcnn_input_info['gt_boxes3d'] = input_data['gt_boxes3d']
 
